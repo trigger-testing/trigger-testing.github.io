@@ -1,6 +1,25 @@
 ---
 layout: default
 ---
+<!-- test wildcard redirect -->
+<script>
+(function(){
+    const openUrlPrefix = '/goto-url/';
+    let slug = location.pathname;
+    //DEBUG:
+    //slug = openUrlPrefix + 'data%3Aimage/svg+xml;base64,AAAAA==';
+
+    if (slug.startsWith(openUrlPrefix)) {
+      let newLoc = slug.substring(openUrlPrefix.length);
+
+      newLoc = newLoc.replace(/^([A-Za-z]+)%3[Aa]([A-Za-z]*)/, '$1:$2'); 
+      //newLoc = newLoc.replace(/^([A-Za-z]+)%3[Aa]([A-Za-z]*)((?:\/|%2[Ff]){2})/, '$1:$2'); 
+      //newLoc = newLoc.replace(/^([A-Za-z]+:[A-Za-z]*)((?:\/|%2[Ff]){2})/, '$1://');
+
+      location = newLoc;
+    }
+  })();
+</script>
 
 <style type="text/css" media="screen">
   .container {
@@ -15,6 +34,7 @@ layout: default
     letter-spacing: -1px;
   }
 </style>
+
 
 <div class="container">
   <h1>404</h1>
